@@ -39,7 +39,7 @@ logic [31:0] IRQSTAT; //interrupt status
 
 assign wr_ready = 1'b1; //No backpressure for now
 
-always_ff @(poseedge clk or negedge rstn) begin
+always_ff @(posedge clk or negedge rstn) begin
     if(!rstn) begin
         CTRL <= '0;
         LOAD <= '0;

@@ -17,7 +17,7 @@ logic WREADY;
 
 
 //write Response channel
-logc [1:0] BRESP;
+logic [1:0] BRESP;
 logic BVALID;
 logic BREADY;
 

@@ -12,7 +12,7 @@ module timer_core(
 
 logic running;
 
-alwasy_ff @(posedge clk or negedge rstn) begin
+always_ff @(posedge clk or negedge rstn) begin
     if(!rstn) begin
         cur_count <= 0;
         running <= 0;
