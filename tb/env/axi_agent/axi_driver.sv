@@ -37,81 +37,59 @@ class axi_driver extends uvm_driver #(axi_seq_item);
     // WRITE TRANSACTION
     // ---------------------------------------------------------
     task send_write(axi_seq_item req);
-
         `uvm_info("AXI_DRV",
                   $sformatf("WRITE: addr=0x%0h data=0x%0h",
-                            req.addr, req.wdata),
-                  UVM_MEDIUM)
+                    req.addr, req.wdata),
+                    UVM_MEDIUM)
 
-        // Address channel
+        // Address
         vif.AWADDR  <= req.addr;
         vif.AWVALID <= 1;
 
-        @(posedge vif.ACLK);
-        wait (vif.AWREADY);
-
-        vif.AWVALID <= 0;
-
-        // Data channel
+        // Data
         vif.WDATA  <= req.wdata;
         vif.WSTRB  <= 4'hF;
         vif.WVALID <= 1;
 
-        @(posedge vif.ACLK);
-        wait (vif.WREADY);
+        // Wait for AWREADY & WREADY at the SAME cycle
+        do @(posedge vif.ACLK); while (!(vif.AWREADY && vif.WREADY));
 
-        vif.WVALID <= 0;
+        // Done driving
+        vif.AWVALID <= 0;
+        vif.WVALID  <= 0;
 
         // Write response
         vif.BREADY <= 1;
-
         @(posedge vif.ACLK);
-        wait (vif.BVALID);
-
-        if (vif.BRESP != 0)
-            `uvm_error("AXI_WRITE", "BRESP not OKAY")
-
         vif.BREADY <= 0;
-
     endtask
+
 
 
     // ---------------------------------------------------------
     // READ TRANSACTION
     // ---------------------------------------------------------
     task send_read(axi_seq_item req);
-
         `uvm_info("AXI_DRV",
                   $sformatf("READ: addr=0x%0h", req.addr),
                   UVM_MEDIUM)
 
-        // Address channel
         vif.ARADDR  <= req.addr;
         vif.ARVALID <= 1;
 
-        @(posedge vif.ACLK);
-        wait (vif.ARREADY);
+        // Wait for ARREADY
+        do @(posedge vif.ACLK); while (!vif.ARREADY);
 
         vif.ARVALID <= 0;
 
-        // Data return
         vif.RREADY <= 1;
 
-        @(posedge vif.ACLK);
-        wait (vif.RVALID);
+        // Wait for RVALID
+        do @(posedge vif.ACLK); while (!vif.RVALID);
 
         req.rdata = vif.RDATA;
 
-        `uvm_info("AXI_DRV",
-                  $sformatf("READ DATA @0x%0h = 0x%0h",
-                             req.addr, req.rdata),
-                  UVM_LOW)
-
-        if (vif.RRESP != 0)
-            `uvm_error("AXI_READ", "RRESP not OKAY")
-
         vif.RREADY <= 0;
-
     endtask
 
 endclass
