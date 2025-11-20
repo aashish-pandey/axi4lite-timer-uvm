@@ -6,30 +6,38 @@ module top_tb;
     logic ACLK;
     logic ARESETn;
 
-    //Clock
+    // Clock generation
     initial begin
         ACLK = 0;
-        forever #5 ACLK = ~ACLK;
+        forever #5 ACLK = ~ACLK;  // 100 MHz
     end
 
-    //RESET
+    // Reset generation
     initial begin
         ARESETn = 0;
         #50;
         ARESETn = 1;
     end
 
-    //DUT
+    // DUT interface
     axi4lite_if axi_if(ACLK, ARESETn);
 
+    // DUT instantiation
     top_timer dut (
-        .ACLK(ACLK),
-        .ARESETn(ARESETn),
-        .axi(axi_if)
+        .ACLK     (ACLK),
+        .ARESETn  (ARESETn),
+        .axi      (axi_if)
     );
 
-    //pass VIF to TB
+    // Start UVM test
     initial begin
-        uvm_config_db#(virtual axi4lite_if)::set(null, "uvm_test_top.env.agent.*", "vif", axi_if);
+        // Pass VIF to test (not directly to agent)
+        uvm_config_db#(virtual axi4lite_if)::set(null,
+                                                 "uvm_test_top.env",
+                                                 "vif",
+                                                 axi_if);
+
         run_test("test_basic");
     end
+
+endmodule

@@ -9,19 +9,26 @@ class basic_read_write_seq extends uvm_sequence #(axi_seq_item);
     task body();
         axi_seq_item tr;
 
-        //simple write
-        tr = axi_seq_item::type_id::create("tr");
-        tr.is_written = 1;
-        tr.adder = 4'h0;
-        tr.wdata = 32'h1;
-        
+        // -----------------------------------------------------
+        // Simple WRITE: CTRL register @ 0x0, write 1
+        // -----------------------------------------------------
+        tr = axi_seq_item::type_id::create("wr_tr");
+
+        tr.is_write = 1;
+        tr.addr     = 4'h0;       // CTRL register
+        tr.wdata    = 32'h1;      // START = 1
+
         start_item(tr);
         finish_item(tr);
 
-        //simple read
-        tr = axi_seq_item::type_id::create("tr2");
+        // -----------------------------------------------------
+        // Simple READ: COUNT register @ 0x8
+        // -----------------------------------------------------
+        tr = axi_seq_item::type_id::create("rd_tr");
+
         tr.is_write = 0;
-        tr.addr = 4'h8;
+        tr.addr     = 4'h8;       // COUNT register
+
         start_item(tr);
         finish_item(tr);
     endtask
