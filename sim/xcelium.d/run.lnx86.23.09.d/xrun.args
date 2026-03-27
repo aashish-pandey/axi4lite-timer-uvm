@@ -1,0 +1,11 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-f
+xrun.f
+-uvm
+-top
+top_tb
++UVM_TESTNAME=test_basic
++UVM_VERBOSITY=UVM_MEDIUM
