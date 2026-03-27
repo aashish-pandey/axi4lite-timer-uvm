@@ -1,0 +1,32 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-INPUT
+"@source /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/additions/sv/files/tcl/uvm_sim.tcl"
++UVM_VERBOSITY=UVM_MEDIUM
+-uvmhome
+/opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d
+-sv_lib
+/opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmpli.so
++UVM_TESTNAME=test_basic
+-MESSAGES
+-RUN
+-SV_LIB
+/opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmdpi.so
++EMGRLOG
+xrun.log
+-XLSTIME
+1774639109
+-XLKEEP
+-XLMODE
+./xcelium.d/run.lnx86.23.09.d
+-RUNMODE
+-CDSLIB
+./xcelium.d/run.lnx86.23.09.d/cds.lib
+-HDLVAR
+./xcelium.d/run.lnx86.23.09.d/hdl.var
+-XLNAME
+xrun
+-XLVERSION
+"TOOL:	xrun	23.09-s012"

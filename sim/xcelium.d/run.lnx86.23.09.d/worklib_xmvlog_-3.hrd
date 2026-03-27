@@ -1,0 +1,20 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-INCDIR
+../tb
+-INCDIR
+../tb/env
+-INCDIR
+../tb/env/axi_agent
+-INCDIR
+../tb/sequences
+-INCDIR
+../tb/tests
+-I_INCDIR
+/opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src
+-DEFINE
+USE_PARAMETERIZED_WRAPPER
+-I_INCDIR
+/opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/additions/sv
