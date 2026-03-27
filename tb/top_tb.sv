@@ -22,6 +22,7 @@ module top_tb;
     initial begin
         $dumpfile("waves.vcd");
         $dumpvars(0, top_tb);
+        $dumpvars(0, top_tb.axi_if);
     end
     // DUT interface
     axi4lite_if axi_if(ACLK, ARESETn);

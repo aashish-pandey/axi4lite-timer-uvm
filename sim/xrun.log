@@ -1,5 +1,5 @@
 xrun: 23.09-s012: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:45:36 EDT
+TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:51:17 EDT
 /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun
 	-f xrun.f
 		-incdir ../tb
@@ -22,8 +22,8 @@ TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:45:36 EDT
 	+UVM_VERBOSITY=UVM_MEDIUM
 
 Recompiling... reason: file '../tb/top_tb.sv' is newer than expected.
-	expected: Fri Mar 27 15:42:13 2026
-	actual:   Fri Mar 27 15:45:24 2026
+	expected: Fri Mar 27 15:45:24 2026
+	actual:   Fri Mar 27 15:51:05 2026
 Compiling UVM packages (uvm_pkg.sv cdns_uvm_pkg.sv) using uvmhome location /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d
 file: ../tb/tb_pkg.sv
     `uvm_object_utils_end;
@@ -49,8 +49,8 @@ xmvlog: *W,SPDUSD: Include directory ../tb/tests given but not used.
 		top_tb
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.top_tb:sv <0x2a9a5340>
-			streams: 596, words: 535182
+		worklib.top_tb:sv <0x446f5fd9>
+			streams: 596, words: 535282
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
@@ -103,6 +103,11 @@ xmsim: *W,DVEXACC: some objects excluded from $dumpvars due to access restrictio
            Scope: top_tb
             Time: 0 FS + 0
 
+xmsim: *W,DVEXACC: some objects excluded from $dumpvars due to access restrictions, use +access+r on command line for access to all objects.
+            File: ../tb/top_tb.sv, line = 25, pos = 16
+           Scope: top_tb
+            Time: 0 FS + 0
+
 UVM_INFO @ 0: reporter [RNTST] Running test test_basic...
 UVM_INFO ../tb/./env/axi_agent/axi_driver.sv(56) @ 50: uvm_test_top.env.agent.drv [AXI_DRV] WRITE: addr=0x0 data=0x1
 UVM_INFO ../tb/./env/axi_agent/axi_monitor.sv(65) @ 55: uvm_test_top.env.agent.mon [AXI_MON] MON WRITE ADDR: 0x0
@@ -143,4 +148,4 @@ UVM_FATAL :    0
 Simulation complete via $finish(1) at time 205 NS + 48
 /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
 xcelium> exit
-TOOL:	xrun	23.09-s012: Exiting on Mar 27, 2026 at 15:45:41 EDT  (total: 00:00:05)
+TOOL:	xrun	23.09-s012: Exiting on Mar 27, 2026 at 15:51:22 EDT  (total: 00:00:05)
