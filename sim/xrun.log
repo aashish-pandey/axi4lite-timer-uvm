@@ -1,5 +1,5 @@
 xrun: 23.09-s012: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:18:29 EDT
+TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:34:21 EDT
 /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun
 	-f xrun.f
 		-incdir ../tb
@@ -21,18 +21,19 @@ TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:18:29 EDT
    User defined plus("+") options:
 	+UVM_VERBOSITY=UVM_MEDIUM
 
-Recompiling... reason: file '../rtl/top_timer.sv' is newer than expected.
-	expected: Fri Mar 27 14:49:31 2026
-	actual:   Fri Mar 27 15:18:12 2026
+Recompiling... reason: file '../tb/env/timer_scoreboard.sv' is newer than expected.
+	expected: Fri Mar 27 14:49:32 2026
+	actual:   Fri Mar 27 15:34:09 2026
 Compiling UVM packages (uvm_pkg.sv cdns_uvm_pkg.sv) using uvmhome location /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d
-file: ../rtl/top_timer.sv
-	module worklib.top_timer:sv
-		errors: 0, warnings: 0
 file: ../tb/tb_pkg.sv
     `uvm_object_utils_end;
                          |
 xmvlog: *W,UEXPSC (../tb/./env/axi_agent/axi_seq_item.sv,13|25): Ignored unexpected semicolon following SystemVerilog description keyword (endfunction).
+	package worklib.tb_pkg:sv
+		errors: 0, warnings: 1
 file: ../tb/top_tb.sv
+	module worklib.top_tb:sv
+		errors: 0, warnings: 0
 xmvlog: *W,SPDUSD: Include directory ../tb/env given but not used.
 xmvlog: *W,SPDUSD: Include directory ../tb/env/axi_agent given but not used.
 xmvlog: *W,SPDUSD: Include directory ../tb/sequences given but not used.
@@ -50,8 +51,8 @@ xmvlog: *W,SPDUSD: Include directory ../tb/tests given but not used.
 		top_tb
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.top_timer:sv <0x0891caa0>
-			streams:  23, words:  4176
+		worklib.top_tb:sv <0x17a19a21>
+			streams: 595, words: 534909
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
@@ -108,7 +109,7 @@ UVM_INFO ../tb/./env/timer_scoreboard.sv(64) @ 75: uvm_test_top.env.sb [SB_WRITE
 UVM_INFO ../tb/./env/axi_agent/axi_driver.sv(86) @ 85: uvm_test_top.env.agent.drv [AXI_DRV] READ: addr=0x8
 UVM_INFO ../tb/./env/axi_agent/axi_monitor.sv(115) @ 95: uvm_test_top.env.agent.mon [AXI_MON] MON READ ADDR: 0x8
 UVM_INFO ../tb/./env/axi_agent/axi_monitor.sv(135) @ 105: uvm_test_top.env.agent.mon [AXI_MON] MON READ DATA: addr=0x8 data=0x3
-UVM_ERROR ../tb/./env/timer_scoreboard.sv(92) @ 105: uvm_test_top.env.sb [SB_MATCH] READ MISMATCH @ COUNT: EXPECTED=0x0, GOT=0x3
+UVM_INFO ../tb/./env/timer_scoreboard.sv(83) @ 105: uvm_test_top.env.sb [SB_READ] COUNT=0x3 (running)
 UVM_INFO ../tb/./env/axi_agent/axi_driver.sv(105) @ 105: uvm_test_top.env.agent.drv [AXI_DRV] READ DATA: addr=0x8 data=0x3
 UVM_INFO /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_objection.svh(1268) @ 205: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
 
@@ -125,18 +126,18 @@ Number of caught UVM_WARNING reports :    0
 --- UVM Report Summary ---
 
 ** Report counts by severity
-UVM_INFO :   11
+UVM_INFO :   12
 UVM_WARNING :    0
-UVM_ERROR :    1
+UVM_ERROR :    0
 UVM_FATAL :    0
 ** Report counts by id
 [AXI_DRV]     3
 [AXI_MON]     5
 [RNTST]     1
-[SB_MATCH]     1
+[SB_READ]     1
 [SB_WRITE]     1
 [TEST_DONE]     1
 Simulation complete via $finish(1) at time 205 NS + 48
 /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
 xcelium> exit
-TOOL:	xrun	23.09-s012: Exiting on Mar 27, 2026 at 15:18:33 EDT  (total: 00:00:04)
+TOOL:	xrun	23.09-s012: Exiting on Mar 27, 2026 at 15:34:26 EDT  (total: 00:00:05)
