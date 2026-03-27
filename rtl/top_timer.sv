@@ -20,7 +20,7 @@ module top_timer(
     logic        irq_clear;
 
     // ---------------------------------------------------------
-    // AXI4-Lite WRITE (simple slave)
+    // AXI4-Lite WRITE
     // ---------------------------------------------------------
     assign wr_en   = axi.AWVALID & axi.WVALID;
     assign wr_addr = axi.AWADDR;
@@ -28,12 +28,25 @@ module top_timer(
 
     assign axi.AWREADY = 1'b1;
     assign axi.WREADY  = 1'b1;
-
-    assign axi.BVALID  = wr_en;
     assign axi.BRESP   = 2'b00;
 
+    // BVALID must be registered — cannot be combinatorially tied to wr_en
+    // because AWVALID/WVALID are already deasserted by the time driver checks BVALID
+    logic bvalid_r;
+
+    always_ff @(posedge ACLK or negedge ARESETn) begin
+        if (!ARESETn)
+            bvalid_r <= 1'b0;
+        else if (axi.AWVALID && axi.WVALID && axi.AWREADY && axi.WREADY)
+            bvalid_r <= 1'b1;
+        else if (axi.BREADY && bvalid_r)
+            bvalid_r <= 1'b0;
+    end
+
+    assign axi.BVALID = bvalid_r;
+
     // ---------------------------------------------------------
-    // CORRECT AXI4-Lite READ LOGIC (NO HANG)
+    // AXI4-Lite READ
     // ---------------------------------------------------------
     logic [3:0] latched_rd_addr;
     logic       read_pending;
@@ -46,24 +59,20 @@ module top_timer(
             read_pending    <= 1'b0;
         end
         else begin
-            // Address phase
             if (axi.ARVALID && axi.ARREADY) begin
                 latched_rd_addr <= axi.ARADDR;
                 read_pending    <= 1'b1;
             end
-
-            // Read transaction completes
             if (axi.RVALID && axi.RREADY) begin
                 read_pending <= 1'b0;
             end
         end
     end
 
-    assign rd_addr  = latched_rd_addr;
-    assign rd_en    = read_pending;
-
-    assign axi.RDATA = rd_data;
-    assign axi.RRESP = 2'b00;
+    assign rd_addr    = latched_rd_addr;
+    assign rd_en      = read_pending;
+    assign axi.RDATA  = rd_data;
+    assign axi.RRESP  = 2'b00;
     assign axi.RVALID = read_pending;
 
     // ---------------------------------------------------------
