@@ -3,3 +3,7 @@ s2(27Mar2026:15:11:57):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f 
 s3(27Mar2026:15:15:51):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM 
 s4(27Mar2026:15:18:30):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM 
 s5(27Mar2026:15:34:21):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM 
+s6(27Mar2026:15:39:53):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM -gui 
+s7(27Mar2026:15:42:35):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM 
+s8(27Mar2026:15:45:00):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM 
+s9(27Mar2026:15:45:37):  /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM 

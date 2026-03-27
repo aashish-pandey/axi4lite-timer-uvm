@@ -20,8 +20,8 @@ module top_tb;
     end
     // Waveform dump
     initial begin
-        $shm_open("waves.shm");
-        $shm_probe("AS");
+        $dumpfile("waves.vcd");
+        $dumpvars(0, top_tb);
     end
     // DUT interface
     axi4lite_if axi_if(ACLK, ARESETn);
