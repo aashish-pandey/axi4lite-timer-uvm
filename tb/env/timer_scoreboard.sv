@@ -75,7 +75,20 @@ class timer_scoreboard extends uvm_component;
         case (tr.addr)
             4'h0: name = "CTRL";
             4'h4: name = "LOAD";
-            4'h8: name = "COUNT";
+            4'h8: begin
+                if (reg_model["CTRL"][0]) begin
+                    if (tr.rdata == 0)
+                        `uvm_error("SB_MATCH", "COUNT should be non-zero when timer enabled")
+                    else
+                        `uvm_info("SB_READ", $sformatf("COUNT=0x%0h (running)", tr.rdata), UVM_LOW)
+                end else begin
+                    if (tr.rdata !== 0)
+                        `uvm_error("SB_MATCH", "COUNT should be 0 when timer disabled")
+                    else
+                        `uvm_info("SB_READ", "COUNT=0 OK (timer disabled)", UVM_LOW)
+                end
+                return;
+            end
             4'hC: name = "IRQSTAT";
             default: begin
                 `uvm_warning("SB_READ",
