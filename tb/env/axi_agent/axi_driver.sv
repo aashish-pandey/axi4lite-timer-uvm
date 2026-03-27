@@ -52,28 +52,27 @@ class axi_driver extends uvm_driver #(axi_seq_item);
     // ---------------------------------------------------------
     task send_write(axi_seq_item req);
         `uvm_info("AXI_DRV",
-                  $sformatf("WRITE: addr=0x%0h data=0x%0h",
-                    req.addr, req.wdata),
-                    UVM_MEDIUM)
+                $sformatf("WRITE: addr=0x%0h data=0x%0h", req.addr, req.wdata),
+                UVM_MEDIUM)
 
-        // Drive AW + W channels simultaneously
         vif.AWADDR  <= req.addr;
         vif.AWVALID <= 1;
         vif.WDATA   <= req.wdata;
         vif.WSTRB   <= 4'hF;
         vif.WVALID  <= 1;
 
-        // Wait for DUT to accept both address and data
         do @(posedge vif.ACLK); while (!(vif.AWREADY && vif.WREADY));
 
         vif.AWVALID <= 0;
         vif.WVALID  <= 0;
 
-        // Wait for BVALID before asserting BREADY
         do @(posedge vif.ACLK); while (!vif.BVALID);
         vif.BREADY <= 1;
         @(posedge vif.ACLK);
         vif.BREADY <= 0;
+
+        // ← ADD THIS: one idle cycle before next transaction
+        @(posedge vif.ACLK);
 
     endtask
 
