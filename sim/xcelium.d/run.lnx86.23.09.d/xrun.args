@@ -9,3 +9,5 @@ xrun.f
 top_tb
 +UVM_TESTNAME=test_basic
 +UVM_VERBOSITY=UVM_MEDIUM
+-access
++rwc

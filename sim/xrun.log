@@ -1,5 +1,5 @@
 xrun: 23.09-s012: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:51:17 EDT
+TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:53:18 EDT
 /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun
 	-f xrun.f
 		-incdir ../tb
@@ -17,27 +17,11 @@ TOOL:	xrun	23.09-s012: Started on Mar 27, 2026 at 15:51:17 EDT
 	-top top_tb
 	+UVM_TESTNAME=test_basic
 	+UVM_VERBOSITY=UVM_MEDIUM
+	-access +rwc
 
    User defined plus("+") options:
 	+UVM_VERBOSITY=UVM_MEDIUM
 
-Recompiling... reason: file '../tb/top_tb.sv' is newer than expected.
-	expected: Fri Mar 27 15:45:24 2026
-	actual:   Fri Mar 27 15:51:05 2026
-Compiling UVM packages (uvm_pkg.sv cdns_uvm_pkg.sv) using uvmhome location /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d
-file: ../tb/tb_pkg.sv
-    `uvm_object_utils_end;
-                         |
-xmvlog: *W,UEXPSC (../tb/./env/axi_agent/axi_seq_item.sv,13|25): Ignored unexpected semicolon following SystemVerilog description keyword (endfunction).
-file: ../tb/top_tb.sv
-	module worklib.top_tb:sv
-		errors: 0, warnings: 0
-xmvlog: *W,SPDUSD: Include directory ../tb/env given but not used.
-xmvlog: *W,SPDUSD: Include directory ../tb/env/axi_agent given but not used.
-xmvlog: *W,SPDUSD: Include directory ../tb/sequences given but not used.
-xmvlog: *W,SPDUSD: Include directory ../tb/tests given but not used.
-	Total errors/warnings found outside modules and primitives:
-		errors: 0, warnings: 4
 	Elaborating the design hierarchy:
 		Caching library 'worklib' ....... Done
 	Top level design units:
@@ -49,8 +33,22 @@ xmvlog: *W,SPDUSD: Include directory ../tb/tests given but not used.
 		top_tb
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
-		worklib.top_tb:sv <0x446f5fd9>
-			streams: 596, words: 535282
+		worklib.timer_core:sv <0x632ac280>
+			streams:   4, words:  1237
+		worklib.timer_regs:sv <0x784dacda>
+			streams:  10, words:  2492
+		worklib.top_timer:sv <0x3e3f3795>
+			streams:  34, words:  6960
+		worklib.top_tb:sv <0x7581bab7>
+			streams: 596, words: 552885
+		worklib.cdns_uvm_pkg:sv <0x7d618d69>
+			streams: 172, words: 230983
+		worklib.cdns_uvmapi:svp <0x178b1b7d>
+			streams:  27, words: 25419
+		worklib.cdns_assert2uvm_pkg:sv <0x32b05e45>
+			streams:   3, words:  1330
+		worklib.uvm_pkg:sv <0x5b28ce07>
+			streams: 4534, words: 5794779
 	Building instance specific data structures.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
@@ -58,15 +56,15 @@ xmvlog: *W,SPDUSD: Include directory ../tb/tests given but not used.
 		Modules:                       4       4
 		Interfaces:                    1       1
 		Verilog packages:              5       5
-		Registers:                 13891   10231
-		Scalar wires:                 29       -
+		Registers:                 14032   10231
+		Scalar wires:                 30       -
 		Vectored wires:               18       -
 		Named events:                  4      12
 		Always blocks:                 5       5
 		Initial blocks:              288     158
 		Parallel blocks:              26      27
-		Cont. assignments:            11      19
-		Pseudo assignments:           13       -
+		Cont. assignments:            17      19
+		Pseudo assignments:           20       -
 		Assertions:                    2       2
 		Covergroup Instances:          0       3
 		SV Class declarations:       199     313
@@ -97,16 +95,6 @@ CDNS-UVM-1.1d (23.09-s012)
   See http://www.eda.org/svdb/view.php?id=3770 for more details.
 
       (Specify +UVM_NO_RELNOTES to turn off this notice)
-
-xmsim: *W,DVEXACC: some objects excluded from $dumpvars due to access restrictions, use +access+r on command line for access to all objects.
-            File: ../tb/top_tb.sv, line = 24, pos = 16
-           Scope: top_tb
-            Time: 0 FS + 0
-
-xmsim: *W,DVEXACC: some objects excluded from $dumpvars due to access restrictions, use +access+r on command line for access to all objects.
-            File: ../tb/top_tb.sv, line = 25, pos = 16
-           Scope: top_tb
-            Time: 0 FS + 0
 
 UVM_INFO @ 0: reporter [RNTST] Running test test_basic...
 UVM_INFO ../tb/./env/axi_agent/axi_driver.sv(56) @ 50: uvm_test_top.env.agent.drv [AXI_DRV] WRITE: addr=0x0 data=0x1
@@ -148,4 +136,4 @@ UVM_FATAL :    0
 Simulation complete via $finish(1) at time 205 NS + 48
 /opt/eda/cadence/XCELIUM2309/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
 xcelium> exit
-TOOL:	xrun	23.09-s012: Exiting on Mar 27, 2026 at 15:51:22 EDT  (total: 00:00:05)
+TOOL:	xrun	23.09-s012: Exiting on Mar 27, 2026 at 15:53:22 EDT  (total: 00:00:04)

@@ -12,3 +12,4 @@ s7::(27Mar2026:15:42:35):( /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -
 s8::(27Mar2026:15:45:00):( /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM )
 s9::(27Mar2026:15:45:37):( /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM )
 s10::(27Mar2026:15:51:17):( /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM )
+s11::(27Mar2026:15:53:18):( /opt/eda/cadence/XCELIUM2309/tools/xcelium/bin/xrun -f xrun.f -uvm -top top_tb +UVM_TESTNAME=test_basic +UVM_VERBOSITY=UVM_MEDIUM -access +rwc )
