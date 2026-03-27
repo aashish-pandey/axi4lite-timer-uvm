@@ -16,9 +16,23 @@ class axi_driver extends uvm_driver #(axi_seq_item);
 
 
     // ---------------------------------------------------------
-    // RUN PHASE  (FIXED — semicolon added + begin/end)
+    // RUN PHASE
     // ---------------------------------------------------------
     task run_phase(uvm_phase phase);
+        // Idle all outputs until reset deasserts
+        vif.AWVALID <= 0;
+        vif.WVALID  <= 0;
+        vif.BREADY  <= 0;
+        vif.ARVALID <= 0;
+        vif.RREADY  <= 0;
+        vif.AWADDR  <= 0;
+        vif.WDATA   <= 0;
+        vif.WSTRB   <= 0;
+        vif.ARADDR  <= 0;
+
+        @(posedge vif.ACLK);
+        wait(vif.ARESETn === 1'b1);
+
         forever begin
             axi_seq_item req;
             seq_item_port.get_next_item(req);
@@ -42,28 +56,26 @@ class axi_driver extends uvm_driver #(axi_seq_item);
                     req.addr, req.wdata),
                     UVM_MEDIUM)
 
-        // Address
+        // Drive AW + W channels simultaneously
         vif.AWADDR  <= req.addr;
         vif.AWVALID <= 1;
+        vif.WDATA   <= req.wdata;
+        vif.WSTRB   <= 4'hF;
+        vif.WVALID  <= 1;
 
-        // Data
-        vif.WDATA  <= req.wdata;
-        vif.WSTRB  <= 4'hF;
-        vif.WVALID <= 1;
-
-        // Wait for AWREADY & WREADY at the SAME cycle
+        // Wait for DUT to accept both address and data
         do @(posedge vif.ACLK); while (!(vif.AWREADY && vif.WREADY));
 
-        // Done driving
         vif.AWVALID <= 0;
         vif.WVALID  <= 0;
 
-        // Write response
+        // Wait for BVALID before asserting BREADY
+        do @(posedge vif.ACLK); while (!vif.BVALID);
         vif.BREADY <= 1;
         @(posedge vif.ACLK);
         vif.BREADY <= 0;
-    endtask
 
+    endtask
 
 
     // ---------------------------------------------------------
@@ -77,19 +89,24 @@ class axi_driver extends uvm_driver #(axi_seq_item);
         vif.ARADDR  <= req.addr;
         vif.ARVALID <= 1;
 
-        // Wait for ARREADY
+        // Wait for DUT to accept the read address
         do @(posedge vif.ACLK); while (!vif.ARREADY);
 
         vif.ARVALID <= 0;
+        vif.RREADY  <= 1;
 
-        vif.RREADY <= 1;
-
-        // Wait for RVALID
+        // Wait for DUT to return read data
         do @(posedge vif.ACLK); while (!vif.RVALID);
 
         req.rdata = vif.RDATA;
 
+        `uvm_info("AXI_DRV",
+                  $sformatf("READ DATA: addr=0x%0h data=0x%0h",
+                    req.addr, req.rdata),
+                  UVM_MEDIUM)
+
         vif.RREADY <= 0;
+
     endtask
 
 endclass
