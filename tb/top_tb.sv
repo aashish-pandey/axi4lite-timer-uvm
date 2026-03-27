@@ -18,7 +18,11 @@ module top_tb;
         #50;
         ARESETn = 1;
     end
-
+    // Waveform dump
+    initial begin
+        $shm_open("waves.shm");
+        $shm_probe("AS");
+    end
     // DUT interface
     axi4lite_if axi_if(ACLK, ARESETn);
 
